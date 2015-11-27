@@ -15,15 +15,13 @@ int main(int argc, char *argv[])
   // OpenCV video capture object
   cv::VideoCapture capture;
 
-  // OpenCV image objects and ROIs
+  // OpenCV image objects
   cv::Mat frame, gray, img;
 
+  // Rectangles to be drawn
   std::vector<cv::Rect> rects;
-  cv::Rect currentRect;
 
-  cv::Scalar green = (0,255,0);
-
-  // capture id. Associated to device number in /dev/videoX
+  // Camera ID associated to device number in /dev/videoX
   int cam_id = 0;
 
   // Advertising to the user
@@ -36,6 +34,7 @@ int main(int argc, char *argv[])
     return -1;
   }
 
+  // Train the face classifier
   face_detect = cv::CascadeClassifier(face_cascade_name);
 
   // Capture loop until user presses a key
@@ -48,16 +47,21 @@ int main(int argc, char *argv[])
       cv::waitKey();
     }
 
+    // Convert to grayscale
     cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
 
+    // Detect faces and generate the rectangles associated
     face_detect.detectMultiScale(gray, rects, 1.3, 4, cv::CASCADE_SCALE_IMAGE, cv::Size(30, 30), cv::Size(200,200));
 
+    // Safe copy
     img = frame.clone();
 
+    // Draw the rectangles
     for (i=0; i<rects.size(); i++)
     {
       cv::rectangle(img, rects[i], cv::Scalar(0,255,0), 2);
     }
+
     // Show image in a window
     cv::imshow("Output Window", img);
 
