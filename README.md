@@ -35,4 +35,10 @@ This is a personal assignment, please complete it **individually**.
 - **Q3**) Haar features are not the only type available in
     OpenCV. There are also cascade detectors trained using Local
     Binary Patterns (LBP). Use the LBP based cascade detector and
-    compare performance of both.
+    compare the performance of both. You can find this (and other
+    cascades) in /usr/share/opencv/, or online at the [OpenCV
+    github](https://github.com/Itseez/opencv/tree/master/data).
+
+- **Q4**) The example provided in the notebook is a "bare bones"
+    one. For a more complete example see
+    [facedetect.py](https://github.com/Itseez/opencv/blob/master/samples/python2/facedetect.py). Read it and understand how it works.
