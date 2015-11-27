@@ -3,16 +3,10 @@ UVic Robotics Master. Pattern Recognition Homework 4
 
 ## Instructions
 
-Fork this repository and write code to complete the assignments. When
-executed, your code must print the answers to the questions in each
-section, alongside the results that led to these conclusions. Module
-*textwrap* can be used to format long paragraphs of text and make them
-look nicer. An IPython notebook is an acceptable alternative to a
-plain python program.
-
+Fork this repository and write code to complete the assignments.
 First upload the completed assignment to the course Moodle for
-grading; then, correct all the issues marked by the teacher and push it
-to GitHub for the final evaluation.
+grading; then, correct all the issues marked by the teacher and push
+it to GitHub for the final evaluation.
 
 This is a personal assignment, please complete it **individually**. 
 
