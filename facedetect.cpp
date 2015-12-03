@@ -17,10 +17,12 @@ void drawImageOnSomething(cv::Mat image, cv::Mat something, cv::Rect rect, int x
     {
         for (x=0; x<image.rows; x++)
         {
-            cv::Vec3b pixel = image.at<cv::Vec3b>(x,y);
-            if (pixel[0] != 255 && pixel[1] != 255 && pixel[2] != 255)
+            cv::Vec4b pixel = image.at<cv::Vec4b>(x,y);
+            if (pixel[3] > 32)
             {
-                something.at<cv::Vec3b>(x+rect.y+x_offset,y+rect.x+y_offset) = image.at<cv::Vec3b>(x,y);
+                something.at<cv::Vec3b>(x+rect.y+x_offset,y+rect.x+y_offset)[0] = image.at<cv::Vec4b>(x,y)[0];
+                something.at<cv::Vec3b>(x+rect.y+x_offset,y+rect.x+y_offset)[1] = image.at<cv::Vec4b>(x,y)[1];
+                something.at<cv::Vec3b>(x+rect.y+x_offset,y+rect.x+y_offset)[2] = image.at<cv::Vec4b>(x,y)[2];
             }
         }
     }
@@ -73,9 +75,9 @@ int main(int argc, char *argv[])
     // OpenCV image objects
     cv::Mat frame, gray, safeImg, moustacheROI;
 
-    cv::Mat moustache = cv::imread("./img/moustache.png");
+    cv::Mat moustache = cv::imread("./img/moustache.png", cv::IMREAD_UNCHANGED);
     cv::Mat resized_moustache;
-    cv::Mat hat = cv::imread("./img/hat.png");
+    cv::Mat hat = cv::imread("./img/hat.png", cv::IMREAD_UNCHANGED);
     cv::Mat resized_hat;
 
     std::vector<cv::Rect> rects;
@@ -135,7 +137,7 @@ int main(int argc, char *argv[])
                 cv::resize(moustache, resized_moustache, rects[i].size(), 0, 0, cv::INTER_LINEAR);
                 cv::resize(hat, resized_hat, rects[i].size(), 0, 0, cv::INTER_LINEAR);
 
-                drawImageOnSomething(resized_moustache, safeImg, rects[i], 0, 0);
+                drawImageOnSomething(resized_moustache, safeImg, rects[i], rects[i].height/10, 0);
                 drawImageOnSomething(resized_hat, safeImg, rects[i], -rects[i].height, 0);
             }
         }
